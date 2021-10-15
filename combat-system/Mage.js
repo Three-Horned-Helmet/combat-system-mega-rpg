@@ -1,4 +1,6 @@
 const { ClassBase } = require("./ClassBase")
+const mageConstants = require("./config/mage-constants.json")
+
 
 class Mage extends ClassBase {
     constructor(game, owner, team = 1) {
@@ -41,12 +43,8 @@ class Mage extends ClassBase {
         }
     }
     
-    fireball = (target) => {        
-        const DAMAGE_SPREAD = 0.3
-        const MISS_CHANCE = 0.2
-        const CRIT_CHANCE = 0.2
-        const BASE_DAMAGE = 15
-        const DAMAGE_MULTIPLIER = 0.7
+    fireball = (target) => {
+        const { DAMAGE_SPREAD, MISS_CHANCE, CRIT_CHANCE, BASE_DAMAGE, DAMAGE_MULTIPLIER } = mageConstants.abilities.fireball
         
         const enemy = target || this.getRandomEnemy()
         const damage = this.applyCombatModifiersToDamage(enemy, BASE_DAMAGE + (this.attack * (this.attack/this.defense) * ((1-DAMAGE_SPREAD/2) + Math.random() * DAMAGE_SPREAD)) * DAMAGE_MULTIPLIER)
@@ -77,10 +75,7 @@ class Mage extends ClassBase {
     }
 
     fireballDot = (target) => {
-        const DAMAGE_SPREAD = 0.1
-        const MISS_CHANCE = 0
-        const BASE_DAMAGE = 5
-        const DAMAGE_MULTIPLIER = 0.2
+        const { DAMAGE_SPREAD, MISS_CHANCE, BASE_DAMAGE, DAMAGE_MULTIPLIER } = mageConstants.abilities.fireballDot
         
         const enemy = target || this.getRandomEnemy()
         const damage = this.applyCombatModifiersToDamage(enemy, BASE_DAMAGE + (this.attack * (this.attack/this.defense) * ((1-DAMAGE_SPREAD/2) + Math.random() * DAMAGE_SPREAD)) * DAMAGE_MULTIPLIER)
@@ -98,12 +93,8 @@ class Mage extends ClassBase {
         return combatHitStrings[Math.floor(Math.random() * combatHitStrings.length)]
     }
 
-    arcaneblast = () => {
-        const DAMAGE_SPREAD = 0.5
-        const MISS_CHANCE = 0.2
-        const CRIT_CHANCE = 0.1
-        const BASE_DAMAGE = 25
-        const DAMAGE_MULTIPLIER = 1
+    arcaneblast = (target) => {
+        const { DAMAGE_SPREAD, MISS_CHANCE, CRIT_CHANCE, BASE_DAMAGE, DAMAGE_MULTIPLIER } = mageConstants.abilities.arcaneblast
         
         const enemy = target || this.getRandomEnemy()
         const damage = this.applyCombatModifiersToDamage(enemy, BASE_DAMAGE + (this.attack * (this.attack/this.defense) * ((1-DAMAGE_SPREAD/2) + Math.random() * DAMAGE_SPREAD)) * DAMAGE_MULTIPLIER)
@@ -133,7 +124,7 @@ class Mage extends ClassBase {
     }
 
     arcaneConcentration = () => {
-        const ATTACK_INCREASE = 0.4
+        const { ATTACK_INCREASE } = mageConstants.abilities.arcaneConcentration
 
         this.applyAttackModifier(this, ATTACK_INCREASE)
 
@@ -147,11 +138,7 @@ class Mage extends ClassBase {
     }
 
     rainOfFire = () => {
-        const DAMAGE_SPREAD = 0.3
-        const MISS_CHANCE = 0.2
-        const CRIT_CHANCE = 0
-        const BASE_DAMAGE = 10
-        const DAMAGE_MULTIPLIER = 0.4
+        const { DAMAGE_SPREAD, MISS_CHANCE, CRIT_CHANCE, BASE_DAMAGE, DAMAGE_MULTIPLIER } = mageConstants.abilities.rainOfFire
         
         const enemies = this.getAllEnemies()
 

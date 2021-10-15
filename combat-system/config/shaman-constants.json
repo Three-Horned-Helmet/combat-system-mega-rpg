@@ -1,0 +1,40 @@
+{
+    "stats": {
+        "initiativeModifier": 1,
+        "attackModifier": 1.1,
+        "defenseModifier": 0.9
+    },
+    "abilities": {
+        "lightningBolt": {
+            "DAMAGE_SPREAD": 0.4,
+            "MISS_CHANCE": 0.1,
+            "CRIT_CHANCE": 0.2,
+            "BASE_DAMAGE": 25,
+            "DAMAGE_MULTIPLIER": 0.7
+        },
+        "naturesRemedy": {
+            "HEALING_SPREAD": 0.6,
+            "MISS_CHANCE": 0.1,
+            "CRIT_CHANCE": 0.15,
+            "BASE_HEALING": 25,
+            "HEALING_MULTIPLIER": 1
+        },
+        "healingRain": {
+            "HEALING_SPREAD": 0.2,
+            "MISS_CHANCE": 0.2,
+            "CRIT_CHANCE": 0.1,
+            "BASE_HEALING": 15,
+            "HEALING_MULTIPLIER": 0.4
+        },
+        "earthquake": {
+            "DAMAGE_SPREAD": 0.6,
+            "MISS_CHANCE": 0.1,
+            "CRIT_CHANCE": 0.1,
+            "BASE_DAMAGE": 10,
+            "DAMAGE_MULTIPLIER": 0.3
+        },
+        "protectiveTotem": {
+            "DEFENSE_INCREASE": 0.15
+        }
+    }
+}

@@ -1,4 +1,5 @@
 const {ClassBase} = require("./ClassBase")
+const rangerConstants = require("./config/ranger-constants.json")
 
 class Ranger extends ClassBase {
     constructor(game, owner, team = 1){
@@ -41,12 +42,8 @@ class Ranger extends ClassBase {
         }
     }
     
-    piercingArrow = (target) => {        
-        const DAMAGE_SPREAD = 0.1
-        const MISS_CHANCE = 0.05
-        const CRIT_CHANCE = 0.05
-        const BASE_DAMAGE = 10
-        const DAMAGE_MULTIPLIER = 0.8
+    piercingArrow = (target) => {
+        const { DAMAGE_SPREAD, MISS_CHANCE, CRIT_CHANCE, BASE_DAMAGE, DAMAGE_MULTIPLIER } = rangerConstants.abilities.piercingArrow
         
         const enemy = target || this.getRandomEnemy()
         const damage = this.applyCombatModifiersToDamage(enemy, BASE_DAMAGE + (this.attack * (this.attack/this.defense) * ((1-DAMAGE_SPREAD/2) + Math.random() * DAMAGE_SPREAD)) * DAMAGE_MULTIPLIER)
@@ -74,8 +71,7 @@ class Ranger extends ClassBase {
     }
 
     exposeArmor = (target) => {
-        const MISS_CHANCE = 0.1
-        const DEFENSE_DECREASE = 0.2
+        const { MISS_CHANCE, DEFENSE_DECREASE } = rangerConstants.abilities.exposeArmor
         
         const enemy = target || this.getRandomEnemy()
         const attackMissed = Math.random() <= MISS_CHANCE
@@ -98,10 +94,7 @@ class Ranger extends ClassBase {
     }
 
     poisonedArrow = (target) => {
-        const DAMAGE_SPREAD = 0.2
-        const MISS_CHANCE = 0.2
-        const BASE_DAMAGE = 5
-        const DAMAGE_MULTIPLIER = 0.4
+        const { DAMAGE_SPREAD, MISS_CHANCE, BASE_DAMAGE, DAMAGE_MULTIPLIER } = rangerConstants.abilities.poisonedArrow
         
         const enemy = target || this.getRandomEnemy()
         const damage = this.applyCombatModifiersToDamage(enemy, BASE_DAMAGE + (this.attack * (this.attack/this.defense) * ((1-DAMAGE_SPREAD/2) + Math.random() * DAMAGE_SPREAD)) * DAMAGE_MULTIPLIER)
@@ -127,10 +120,7 @@ class Ranger extends ClassBase {
     }
 
     poisonedArrowDot = (target) => {
-        const DAMAGE_SPREAD = 0.1
-        const MISS_CHANCE = 0
-        const BASE_DAMAGE = 5
-        const DAMAGE_MULTIPLIER = 0.4
+        const { DAMAGE_SPREAD, MISS_CHANCE, BASE_DAMAGE, DAMAGE_MULTIPLIER } = rangerConstants.abilities.poisonedArrowDot
         
         const enemy = target || this.getRandomEnemy()
         const damage = this.applyCombatModifiersToDamage(enemy, BASE_DAMAGE + (this.attack * (this.attack/this.defense) * ((1-DAMAGE_SPREAD/2) + Math.random() * DAMAGE_SPREAD)) * DAMAGE_MULTIPLIER)
@@ -148,13 +138,8 @@ class Ranger extends ClassBase {
         return combatHitStrings[Math.floor(Math.random() * combatHitStrings.length)]
     }
     
-    killingArrow = (target) => {        
-        const DAMAGE_SPREAD = 0.4
-        const MISS_CHANCE = 0.2
-        const CRIT_CHANCE = 0
-        const BASE_DAMAGE = 10
-        const DAMAGE_MULTIPLIER = 0.8
-        const HEALTH_THRESHOLD = 0.4
+    killingArrow = (target) => {
+        const { DAMAGE_SPREAD, MISS_CHANCE, CRIT_CHANCE, BASE_DAMAGE, DAMAGE_MULTIPLIER, HEALTH_THRESHOLD } = rangerConstants.abilities.killingArrow
         
         const enemy = target || this.getRandomEnemy()
         const damage = this.applyCombatModifiersToDamage(enemy, BASE_DAMAGE + (this.attack * (this.attack/this.defense) * ((1-DAMAGE_SPREAD/2) + Math.random() * DAMAGE_SPREAD)) * DAMAGE_MULTIPLIER)

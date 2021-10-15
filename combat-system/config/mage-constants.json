@@ -1,0 +1,40 @@
+{
+    "stats": {
+        "initiativeModifier": 1,
+        "attackModifier": 1.3,
+        "defenseModifier": 0.7
+    },
+    "abilities": {
+        "fireball": {
+            "DAMAGE_SPREAD": 0.3,
+            "MISS_CHANCE": 0.2,
+            "CRIT_CHANCE": 0.1,
+            "BASE_DAMAGE": 15,
+            "DAMAGE_MULTIPLIER": 0.7
+        },
+        "fireballDot": {
+            "DAMAGE_SPREAD": 0.1,
+            "MISS_CHANCE": 0,
+            "CRIT_CHANCE": 5,
+            "BASE_DAMAGE": 5,
+            "DAMAGE_MULTIPLIER": 0.2
+        },
+        "arcaneblast": {
+            "DAMAGE_SPREAD": 0.5,
+            "MISS_CHANCE": 0.2,
+            "CRIT_CHANCE": 0.1,
+            "BASE_DAMAGE": 25,
+            "DAMAGE_MULTIPLIER": 1
+        },
+        "arcaneConcentration": {
+            "ATTACK_INCREASE": 0.4
+        },
+        "rainOfFire": {
+            "DAMAGE_SPREAD": 0.3,
+            "MISS_CHANCE": 0.2,
+            "CRIT_CHANCE": 0.0,
+            "BASE_DAMAGE": 10,
+            "DAMAGE_MULTIPLIER": 0.4
+        }
+    }
+}

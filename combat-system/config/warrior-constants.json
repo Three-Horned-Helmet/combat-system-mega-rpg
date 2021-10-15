@@ -1,0 +1,34 @@
+{
+    "stats": {
+        "initiativeModifier": 2,
+        "attackModifier": 0.8,
+        "defenseModifier": 1.2
+    },
+    "abilities": {
+        "slam": {
+            "DAMAGE_SPREAD": 0.4,
+            "MISS_CHANCE": 0.2,
+            "CRIT_CHANCE": 0.2,
+            "BASE_DAMAGE": 20,
+            "DAMAGE_MULTIPLIER": 1
+        },
+        "heartStrike": {
+            "DAMAGE_SPREAD": 0.4,
+            "MISS_CHANCE": 0.5,
+            "CRIT_CHANCE": 0.6,
+            "BASE_DAMAGE": 30,
+            "DAMAGE_MULTIPLIER": 1
+        },
+        "shieldWall": {
+            "DEFENSE_INCREASE": 0.4
+        },
+        "whirlwind": {
+            "DAMAGE_SPREAD": 0.2,
+            "MISS_CHANCE": 0.1,
+            "CRIT_CHANCE": 0.1,
+            "BASE_DAMAGE": 10,
+            "DAMAGE_MULTIPLIER": 0.5,
+            "TARGET_ENEMIES": 3
+        }
+    }
+}

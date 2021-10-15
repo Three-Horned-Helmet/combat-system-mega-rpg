@@ -1,0 +1,40 @@
+{
+    "stats": {
+        "initiativeModifier": 3,
+        "attackModifier": 1.1,
+        "defenseModifier": 0.9
+    },
+    "abilities": {
+        "piercingArrow": {
+            "DAMAGE_SPREAD": 0.1,
+            "MISS_CHANCE": 0.05,
+            "CRIT_CHANCE": 0.05,
+            "BASE_DAMAGE": 10,
+            "DAMAGE_MULTIPLIER": 0.8
+        },
+        "exposeArmor": {
+            "MISS_CHANCE": 0.1,
+            "DEFENSE_DECREASE": 0.2
+        },
+        "poisonedArrow": {
+            "DAMAGE_SPREAD": 0.2,
+            "MISS_CHANCE": 0.2,
+            "BASE_DAMAGE": 5,
+            "DAMAGE_MULTIPLIER": 0.4
+        },
+        "poisonedArrowDot": {
+            "DAMAGE_SPREAD": 0.1,
+            "MISS_CHANCE": 0,
+            "BASE_DAMAGE": 5,
+            "DAMAGE_MULTIPLIER": 0.4
+        },
+        "killingArrow": {
+            "DAMAGE_SPREAD": 0.4,
+            "MISS_CHANCE": 0.2,
+            "CRIT_CHANCE": 0.0,
+            "BASE_DAMAGE": 10,
+            "DAMAGE_MULTIPLIER": 0.8,
+            "HEALTH_THRESHOLD": 0.4
+        }
+    }
+}

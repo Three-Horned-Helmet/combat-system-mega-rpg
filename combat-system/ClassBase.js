@@ -97,7 +97,7 @@ class ClassBase {
     // Returns true if target is alive
     applyDamage = async (target, damage) => {
         target.currentHealth -= Math.floor(damage)
-        if(target.save) await target.save()
+        if(target.save) target.save()
 
         if(target.currentHealth <= 0) {
             this.game.unitDied(target)

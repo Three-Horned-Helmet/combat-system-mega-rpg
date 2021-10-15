@@ -1,6 +1,7 @@
 const { Ranger } = require("./Ranger")
 const { Shaman } = require("./Shaman")
 const { Warrior } = require("./Warrior")
+const { Mage } = require("./Mage")
 
 class Game {
     constructor(MessageAPI, teamOne, teamTwo, options = {}) {
@@ -20,7 +21,8 @@ class Game {
         this.classList = {
             Ranger,
             Shaman,
-            Warrior
+            Warrior,
+            Mage
         }
     }
 
@@ -35,7 +37,7 @@ class Game {
                 castedAbilityRes = randomAbilities[Math.floor(Math.random() * randomAbilities.length)].cast()
             } else {
                 const chosenAbility = await this.MessageAPI.generateAbilityOptionsMessage(currentUnit, randomAbilities)
-                if(chosenAbility.cast){
+                if(chosenAbility?.cast){
                     castedAbilityRes = chosenAbility.cast()
                 }
             }
@@ -70,6 +72,7 @@ class Game {
     _newCombatRound = () => {
         if(!this.combatTimeline[this.currentTurn]){
             this.round += 1
+            if(this.round >= this.maxRounds) return this._endGame()
             console.log("New round: " + this.round)
             this.currentTurn = 0
 

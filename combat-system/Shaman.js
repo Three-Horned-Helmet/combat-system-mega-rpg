@@ -1,4 +1,5 @@
 const {ClassBase} = require("./ClassBase")
+const shamanConstants = require("./config/shaman-constants.json")
 
 class Shaman extends ClassBase {
     constructor(game, owner, team = 1) {
@@ -7,9 +8,9 @@ class Shaman extends ClassBase {
         this.className = "Shaman"
         this.description = "A versatile Shaman that uses natures power to heal and deal damage"
         
-        this.classInitiativeModifier = 1
-        this.classAttackModifier = 1.1
-        this.classDefenseModifier = 0.9
+        this.classInitiativeModifier = shamanConstants.stats.initiativeModifier
+        this.classAttackModifier = shamanConstants.stats.attackModifier
+        this.classDefenseModifier = shamanConstants.stats.defenseModifier
     }
 
     abilities = () => {
@@ -42,13 +43,9 @@ class Shaman extends ClassBase {
         }
     }
     
-    lightningBolt = (target) => {        
-        const DAMAGE_SPREAD = 0.4
-        const MISS_CHANCE = 0.1
-        const CRIT_CHANCE = 0.2
-        const BASE_DAMAGE = 25
-        const DAMAGE_MULTIPLIER = 0.7
-        
+    lightningBolt = (target) => {    
+        const { DAMAGE_SPREAD, MISS_CHANCE, CRIT_CHANCE, BASE_DAMAGE, DAMAGE_MULTIPLIER } = shamanConstants.abilities.lightningBolt
+
         const enemy = target || this.getRandomEnemy()
         const damage = this.applyCombatModifiersToDamage(enemy, BASE_DAMAGE + (this.attack * (this.attack/this.defense) * ((1-DAMAGE_SPREAD/2) + Math.random() * DAMAGE_SPREAD)) * DAMAGE_MULTIPLIER)
         const attackMissed = Math.random() <= MISS_CHANCE
@@ -75,11 +72,7 @@ class Shaman extends ClassBase {
     }
 
     naturesRemedy = (target) => {
-        const HEALING_SPREAD = 0.6
-        const MISS_CHANCE = 0.1
-        const CRIT_CHANCE = 0.15
-        const BASE_HEALING = 25
-        const HEALING_MULTIPLIER = 0.7
+        const { HEALING_SPREAD, MISS_CHANCE, CRIT_CHANCE, BASE_HEALING, HEALING_MULTIPLIER } = shamanConstants.abilities.naturesRemedy
         
         const friend = target || this.getRandomFriend()
         const healed = BASE_HEALING + (this.attack * (this.attack/this.defense) * ((1-HEALING_SPREAD/2) + Math.random() * HEALING_SPREAD)) * HEALING_MULTIPLIER
@@ -107,15 +100,11 @@ class Shaman extends ClassBase {
     }
 
     healingRain = () => {
-        const HEALING_SPREAD = 0.2
-        const MISS_CHANCE = 0.2
-        const CRIT_CHANCE = 0.1
-        const BASE_HEALING = 15
-        const HEALING_MULTIPLIER = 0.4
+        const { HEALING_SPREAD, MISS_CHANCE, CRIT_CHANCE, BASE_HEALING, HEALING_MULTIPLIER } = shamanConstants.abilities.healingRain
         
-        const friends = target || this.getAllFriendlyUnits()
+        const friends = this.getAllFriendlyUnits()
 
-        const healingString = friends.forEach(friend => {
+        const healingString = friends.map(friend => {
             const healed = BASE_HEALING + (this.attack * (this.attack/this.defense) * ((1-HEALING_SPREAD/2) + Math.random() * HEALING_SPREAD)) * HEALING_MULTIPLIER
             const attackMissed = Math.random() <= MISS_CHANCE
             const attackCrit = Math.random() <= CRIT_CHANCE
@@ -139,11 +128,7 @@ class Shaman extends ClassBase {
     }
 
     earthquake = () => {
-        const DAMAGE_SPREAD = 0.6
-        const MISS_CHANCE = 0.1
-        const CRIT_CHANCE = 0.1
-        const BASE_DAMAGE = 10
-        const DAMAGE_MULTIPLIER = 0.3
+        const { DAMAGE_SPREAD, MISS_CHANCE, CRIT_CHANCE, BASE_DAMAGE, DAMAGE_MULTIPLIER } = shamanConstants.abilities.earthquake
         
         const enemies = this.getAllEnemies()
 
@@ -172,7 +157,7 @@ class Shaman extends ClassBase {
     }
 
     protectiveTotem = () => {
-        const DEFENSE_INCREASE = 0.15
+        const { DEFENSE_INCREASE } = shamanConstants.abilities.protectiveTotem
 
         const friendlyUnits = this.getAllFriendlyUnits()
 

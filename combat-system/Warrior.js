@@ -1,4 +1,5 @@
 const {ClassBase} = require("./ClassBase")
+const warriorConstants = require("./config/warrior-constants.json")
 
 class Warrior extends ClassBase {
     constructor(game, owner, team = 1){
@@ -7,9 +8,9 @@ class Warrior extends ClassBase {
         this.className = "Warrior"
         this.description = "A ruthless Warrior that hits before it thinks!"
 
-        this.classInitiativeModifier = 2
-        this.classAttackModifier = 0.8
-        this.classDefenseModifier = 1.2
+        this.classInitiativeModifier = warriorConstants.stats.initiativeModifier
+        this.classAttackModifier = warriorConstants.stats.attackModifier
+        this.classDefenseModifier = warriorConstants.stats.defenseModifier
     }
 
     abilities = () => {
@@ -37,13 +38,9 @@ class Warrior extends ClassBase {
         }
     }
     
-    slam = () => {        
-        const DAMAGE_SPREAD = 0.4
-        const MISS_CHANCE = 0.2
-        const CRIT_CHANCE = 0.2
-        const BASE_DAMAGE = 20
-        const DAMAGE_MULTIPLIER = 1
-        
+    slam = () => {    
+        const { DAMAGE_SPREAD, MISS_CHANCE, CRIT_CHANCE, BASE_DAMAGE, DAMAGE_MULTIPLIER } = warriorConstants.abilities.slam
+
         const enemy = this.getRandomEnemy()
         const damage = this.applyCombatModifiersToDamage(enemy, BASE_DAMAGE + (this.attack * (this.attack/this.defense) * ((1-DAMAGE_SPREAD/2) + Math.random() * DAMAGE_SPREAD)) * DAMAGE_MULTIPLIER)
         const attackMissed = Math.random() <= MISS_CHANCE
@@ -70,12 +67,8 @@ class Warrior extends ClassBase {
     }
 
 
-    heartStrike = (target) => {        
-        const DAMAGE_SPREAD = 0.4
-        const MISS_CHANCE = 0.5
-        const CRIT_CHANCE = 0.6
-        const BASE_DAMAGE = 30
-        const DAMAGE_MULTIPLIER = 1
+    heartStrike = (target) => {       
+        const { DAMAGE_SPREAD, MISS_CHANCE, CRIT_CHANCE, BASE_DAMAGE, DAMAGE_MULTIPLIER } = warriorConstants.abilities.heartStrike
         
         const enemy = this.getRandomEnemy()
         const damage = this.applyCombatModifiersToDamage(enemy, BASE_DAMAGE + (this.attack * (this.attack/this.defense) * ((1-DAMAGE_SPREAD/2) + Math.random() * DAMAGE_SPREAD)) * DAMAGE_MULTIPLIER)
@@ -103,7 +96,7 @@ class Warrior extends ClassBase {
     }
 
     shieldWall = () => {
-        const DEFENSE_INCREASE = 0.4
+        const { DEFENSE_INCREASE } = warriorConstants.abilities.shieldWall
 
         this.applyDefenseModifier(this, DEFENSE_INCREASE)
 
@@ -117,12 +110,7 @@ class Warrior extends ClassBase {
     }
 
     whirlwind = () => {
-        const DAMAGE_SPREAD = 0.2
-        const MISS_CHANCE = 0.1
-        const CRIT_CHANCE = 0.1
-        const BASE_DAMAGE = 10
-        const TARGET_ENEMIES = 3
-        const DAMAGE_MULTIPLIER = 0.5
+        const { DAMAGE_SPREAD, MISS_CHANCE, CRIT_CHANCE, BASE_DAMAGE, DAMAGE_MULTIPLIER, TARGET_ENEMIES } = warriorConstants.abilities.whirlwind
         
         const enemies = this.getSeveralRandomEnemies(TARGET_ENEMIES)
 
