@@ -1,15 +1,14 @@
 {
-  "name": "combat-system-mega-rpg",
+  "name": "@three-horned-helmet/combat-system-mega-rpg",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "debug": "nodemon --inspect index.js",
-    "dev": "nodemon index.js",
+    "dev": "nodemon demo.js",
     "postinstall": "sh postinstall.sh",
-    "start": "node index.js",
+    "start": "node demo.js",
     "test": "export NODE_ENV=test && nyc mocha --exit './test/**/*.test.js'"
   },
-  "author": "",
-  "license": "ISC"
+  "author": "Markus Heldrup"
 }

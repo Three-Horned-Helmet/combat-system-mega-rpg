@@ -1,11 +1,8 @@
-const { askQuestion } = require("./helper")
 const { GameEngine } = require("./combat-system/GameEngine")
-const { MessageEngine } = require("./combat-system/MessageEngine")
-const {playerOne, playerTwo, playerTree, playerFour} = require("./exampleUsers")
+const { AbilityEngine } = require("./combat-system/AbilityEngine")
+const { Mage } = require("./combat-system/Mage")
+const { Ranger } = require("./combat-system/Ranger")
+const { Warrior } = require("./combat-system/Warrior")
+const { Shaman } = require("./combat-system/Shaman")
 
-const startGame = async () => {
-    const gameEngine = new GameEngine(new MessageEngine(askQuestion), [playerOne], [playerFour])
-    gameEngine.startGame()
-}
-
-startGame()
+module.exports = { GameEngine, AbilityEngine, Mage, Ranger, Warrior, Shaman }
