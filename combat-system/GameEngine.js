@@ -4,7 +4,14 @@ const { Warrior } = require("./classes/Warrior")
 const { Mage } = require("./classes/Mage")
 
 class GameEngine {
-    constructor(MessageAPI, teamOne, teamTwo, options = {}) {
+    constructor(MessageAPI = {
+        pickAbilityMessage: (player, abilities) => {},
+        deathMessage: (players) => {},
+        effectMessage: (message) => {},
+        abilityMessage: (abilityResponse) => {},
+        newRoundMessage: (round) => {},
+        endGameMessage: (winningTeam) => {}
+    }, teamOne, teamTwo, options = {}) {
         const { maxRounds = 5 } = options
         this.maxRounds = maxRounds
 
@@ -32,21 +39,19 @@ class GameEngine {
         while(!this.gameEnded && this.round <= this.maxRounds){
             const currentUnit = this.combatTimeline[this.currentTurn]
             const randomAbilities = currentUnit.getRandomAbilities()
-            let castedAbilityRes = ""
+            let usedAbilityRes = ""
             if(currentUnit.npc){
-                castedAbilityRes = randomAbilities[Math.floor(Math.random() * randomAbilities.length)].cast()
+                usedAbilityRes = randomAbilities[Math.floor(Math.random() * randomAbilities.length)].cast()
             } else {
-                const chosenAbility = await this.MessageAPI.generateAbilityOptionsMessage(currentUnit, randomAbilities)
+                const chosenAbility = await this.MessageAPI.pickAbilityMessage(currentUnit, randomAbilities)
                 if(chosenAbility?.cast){
-                    castedAbilityRes = chosenAbility.cast()
+                    usedAbilityRes = chosenAbility.cast()
                 }
             }
-            console.log(castedAbilityRes)
+            await this.MessageAPI.abilityMessage(usedAbilityRes)
 
             if(this.deadUnits.length){
-                this.deadUnits.forEach(unit => {
-                    this.MessageAPI.generateDeathMessage(unit)
-                })
+                await this.MessageAPI.deathMessage(this.deadUnits)
                 this.deadUnits = []
             }
 
@@ -55,7 +60,7 @@ class GameEngine {
             }
 
             this.currentTurn += 1
-            this._newCombatRound()
+            await this._newCombatRound()
         }
     }
 
@@ -69,24 +74,24 @@ class GameEngine {
         }
     }
 
-    _newCombatRound = () => {
+    _newCombatRound = async () => {
         if(!this.combatTimeline[this.currentTurn]){
             this.round += 1
             if(this.round >= this.maxRounds) return this._endGame()
-            console.log("New round: " + this.round)
+            await this.MessageAPI.newRoundMessage(this.round)
             this.currentTurn = 0
 
-            this._applyCombatEffects()
+            await this._applyCombatEffects()
         }
     }
 
-    _applyCombatEffects = () => {
+    _applyCombatEffects = async () => {
         this.combatTimeline.forEach(unit => {
             if(unit.combatEffects.length){
                 unit.combatEffects = unit.combatEffects.map(effect => {
                     const { DURATION, FROM_ROUND } = effect.constants
                     const stringRes = effect.cast(effect.effectTarget)
-                    this.MessageAPI.generateEffectMessage(stringRes)
+                    this.MessageAPI.effectMessage(stringRes)
                     if(this.round >= (FROM_ROUND + DURATION)){
                         return null
                     } else {
@@ -143,8 +148,15 @@ class GameEngine {
 
     _endGame = () => {
         this.gameEnded = true
-        console.log("END GAME")
-        process.exit()
+        const winningTeam = this._decideWinningTeam()
+        this.MessageAPI.endGameMessage(winningTeam)
+    }
+
+    _decideWinningTeam = () => {
+        const teamOne = this.combatTimeline.filter(u => u.team === 1)
+        if(teamOne.length === this.combatTimeline.length) return this.teamOne
+        else if(!teamOne.length) return this.teamTwo
+        else return null
     }
 }
 

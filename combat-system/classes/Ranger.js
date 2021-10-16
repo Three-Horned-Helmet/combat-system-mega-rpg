@@ -1,5 +1,5 @@
-const {ClassBase} = require("./ClassBase")
-const rangerConstants = require("./config/ranger-constants.json")
+const {ClassBase} = require("../ClassBase")
+const rangerConstants = require("../config/ranger-constants.json")
 
 class Ranger extends ClassBase {
     constructor(game, owner, team = 1){

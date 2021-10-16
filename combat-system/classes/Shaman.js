@@ -1,5 +1,5 @@
-const {ClassBase} = require("./ClassBase")
-const shamanConstants = require("./config/shaman-constants.json")
+const {ClassBase} = require("../ClassBase")
+const shamanConstants = require("../config/shaman-constants.json")
 
 class Shaman extends ClassBase {
     constructor(game, owner, team = 1) {
