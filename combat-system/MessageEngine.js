@@ -6,7 +6,7 @@ class MessageEngine  {
     generateAbilityOptionsMessage = async (player, abilities) => {
         const playerName = player.name
         const allLetters = "abcefghijklmnopqrstuvwxyz".split("")
-        const abilitiesString = `${playerName}: Can pick from abilities ${abilities.map((a, i) => allLetters[i] + ") " + a.name).join(", ")}`
+        const abilitiesString = `${playerName}: Can pick from abilities ${abilities.map((a, i) => allLetters[i] + ") " + a.constants.name).join(", ")}`
         let ability = undefined
         let pickAbilityTimeout = false
         setTimeout(() => {

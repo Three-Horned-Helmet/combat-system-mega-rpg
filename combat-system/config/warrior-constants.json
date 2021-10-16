@@ -6,6 +6,17 @@
     },
     "abilities": {
         "slam": {
+            "name": "slam",
+            "description": "Slams the target with a mighty force",
+            "combatHitStrings": [
+                "${nameSelf} slams ${nameEnemy} to the ground with a mighty force dealing ${damageDealt} damage!"
+            ],
+            "combatCriticalStrings": [
+                "${nameSelf} weapon slams ${nameEnemy} with a critical hit, crushing every bone in its body dealing ${damageDealt} damage!"
+            ],
+            "combatMissStrings": [
+                "${nameSelf}'s mighty swing misses ${nameEnemy} and shatters the ground!"
+            ],
             "DAMAGE_SPREAD": 0.4,
             "MISS_CHANCE": 0.2,
             "CRIT_CHANCE": 0.2,
@@ -13,16 +24,38 @@
             "DAMAGE_MULTIPLIER": 1
         },
         "heartStrike": {
+            "name": "heart strike",
+            "description": "Attempts to slice through the target's heart to deal a critical strike",
+            "combatHitStrings": [
+                "${nameSelf} slices through ${nameEnemy}'s skin dealing ${damageDealt} damage!"
+            ],
+            "combatCriticalStrings": [
+                "${nameSelf} cuts through ${nameEnemy} piercing its heart with a critical hit dealing ${damageDealt} damage!"
+            ],
+            "combatMissStrings": [
+                "In a valient attempt to stab ${nameEnemy}, ${nameSelf} misses awkwardly its target!"
+            ],
             "DAMAGE_SPREAD": 0.4,
             "MISS_CHANCE": 0.5,
             "CRIT_CHANCE": 0.6,
+            "CRIT_MULTIPLIER": 3,
             "BASE_DAMAGE": 30,
-            "DAMAGE_MULTIPLIER": 1
+            "DAMAGE_MULTIPLIER": 0.8
         },
         "shieldWall": {
-            "DEFENSE_INCREASE": 0.4
+            "name": "shield wall",
+            "description": "Raises the shield to increase the defensive capabilities for the rest of the fight",
+            "combatHitStrings": [
+                "${nameSelf} raises the shield to significantly increase its defence!"
+            ],
+            "DEFENSE_MODIFIER": 0.4
         },
         "whirlwind": {
+            "name": "whirlwind",
+            "description": "Spins around hitting multiple targets at the same time",
+            "combatHitStrings": [
+                "${nameSelf} spins around like a whirlwind ${damagesString}!"
+            ],
             "DAMAGE_SPREAD": 0.2,
             "MISS_CHANCE": 0.1,
             "CRIT_CHANCE": 0.1,

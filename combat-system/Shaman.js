@@ -13,65 +13,40 @@ class Shaman extends ClassBase {
         this.classDefenseModifier = shamanConstants.stats.defenseModifier
     }
 
-    abilities = () => {
-        return {
+    abilities = (ability = null) => {
+        const allAbilities = {
             lightningBolt: {
-                name: "lightning bolt",
-                description: "Channels a bolt of lightning towards a targeted enemy",
-                cast: this.lightningBolt
+                cast: this.lightningBolt,
+                constants: shamanConstants.abilities.lightningBolt,
             },
             naturesRemedy: {
-                name: "natures remedy",
-                description: "Summons the natures remedies tp heal a targeted friendly target",
-                cast: this.naturesRemedy
+                cast: this.naturesRemedy,
+                constants: shamanConstants.abilities.naturesRemedy,
             },
             healingRain: {
-                name: "healing rain",
-                description: "Conjures soothing rain healing all friendly units",
-                cast: this.healingRain
+                cast: this.healingRain,
+                constants: shamanConstants.abilities.healingRain,
             },
             earthquake: {
-                name: "earthquake",
-                description: "Channels the hidden powers of the earth causing a massive earthquake damaging all enemies",
-                cast: this.earthquake
+                cast: this.earthquake,
+                constants: shamanConstants.abilities.earthquake,
             },
             protectiveTotem: {
-                name: "protective totem",
-                description: "Places a totem on the ground that will protect all friendly units on the battlefield",
-                cast: this.protectiveTotem
+                cast: this.protectiveTotem,
+                constants: shamanConstants.abilities.protectiveTotem,
             }
         }
+
+        return ability ? allAbilities[ability] : allAbilities
     }
     
-    lightningBolt = (target) => {    
-        const { DAMAGE_SPREAD, MISS_CHANCE, CRIT_CHANCE, BASE_DAMAGE, DAMAGE_MULTIPLIER } = shamanConstants.abilities.lightningBolt
-
-        const enemy = target || this.getRandomEnemy()
-        const damage = this.applyCombatModifiersToDamage(enemy, BASE_DAMAGE + (this.attack * (this.attack/this.defense) * ((1-DAMAGE_SPREAD/2) + Math.random() * DAMAGE_SPREAD)) * DAMAGE_MULTIPLIER)
-        const attackMissed = Math.random() <= MISS_CHANCE
-        const attackCrit = Math.random() <= CRIT_CHANCE
-        const damageDealt = Math.floor(attackMissed ? 0 : attackCrit ? damage * 2 : damage)
-        const nameSelf = this.name || "Shaman"
-        const nameEnemy = enemy.name || "the enemy"
-
-        this.applyDamage(enemy, damageDealt)
-
-        const combatHitStrings = [
-            `${nameSelf} hurls a lightning bolt towards ${nameEnemy} dealing ${damageDealt} damage!`
-        ]
-        const combatCriticalStrings = [
-            `${nameSelf} channels a massive bolt of lightning that critical hits and completely fry ${nameEnemy} for ${damageDealt} damage!`
-        ]
-        const combatMissStrings = [
-            `${nameSelf}'s ligning bolt misses ${nameEnemy} and evaporates in the air!`
-        ]
-
-        if(attackMissed) return combatMissStrings[Math.floor(Math.random() * combatMissStrings.length)]
-        else if(attackCrit) return combatCriticalStrings[Math.floor(Math.random() * combatCriticalStrings.length)]
-        else return combatHitStrings[Math.floor(Math.random() * combatHitStrings.length)]
+    lightningBolt = (target = this.getRandomEnemy()) => {    
+        const lightningBolt = this.abilities("lightningBolt")
+        const abilityResponse = this.useBasicDamageAbility(lightningBolt, target)
+        return this.generateCombatString(lightningBolt, abilityResponse)
     }
 
-    naturesRemedy = (target) => {
+    naturesRemedy = (target = this.getRandomFriend()) => {
         const { HEALING_SPREAD, MISS_CHANCE, CRIT_CHANCE, BASE_HEALING, HEALING_MULTIPLIER } = shamanConstants.abilities.naturesRemedy
         
         const friend = target || this.getRandomFriend()
@@ -128,50 +103,20 @@ class Shaman extends ClassBase {
     }
 
     earthquake = () => {
-        const { DAMAGE_SPREAD, MISS_CHANCE, CRIT_CHANCE, BASE_DAMAGE, DAMAGE_MULTIPLIER } = shamanConstants.abilities.earthquake
-        
-        const enemies = this.getAllEnemies()
-
-        const damagesString = enemies.map(enemy => {
-            const damage = this.applyCombatModifiersToDamage(enemy, BASE_DAMAGE + (this.attack * (this.attack/this.defense) * ((1-DAMAGE_SPREAD/2) + Math.random() * DAMAGE_SPREAD)) * DAMAGE_MULTIPLIER)
-            const attackMissed = Math.random() <= MISS_CHANCE
-            const attackCrit = Math.random() <= CRIT_CHANCE
-            const damageDealt = Math.floor(attackMissed ? 0 : attackCrit ? damage * 2 : damage)
-
-            const nameEnemy = enemy.name || "the enemy"
-
-            this.applyDamage(enemy, damageDealt)
-
-            if(attackMissed) return ` missing ${nameEnemy},`
-            else if(attackCrit) return ` critical hitting ${nameEnemy} for ${damageDealt},`
-            else return ` hitting ${nameEnemy} for ${damageDealt},`
-        }).join("").trim(",")
-
-        const nameSelf = this.name || "Shaman"
-
-        const combatHitStrings = [
-            `${nameSelf} speaks the words of the earh causing a massive earthquake ${damagesString}!`
-        ]
-
-        return combatHitStrings[Math.floor(Math.random() * combatHitStrings.length)]
+        const earthquake = this.abilities("earthquake")
+        const abilityResponse = this.useBasicAreaDamageAbility(earthquake)
+        return this.generateCombatString(rainOfFire, abilityResponse)
     }
 
     protectiveTotem = () => {
-        const { DEFENSE_INCREASE } = shamanConstants.abilities.protectiveTotem
+        const protectiveTotem = this.abilities("protectiveTotem")
+        const { DEFENSE_MODIFIER } = protectiveTotem.constants
 
-        const friendlyUnits = this.getAllFriendlyUnits()
-
-        friendlyUnits.forEach(friend => {
-            this.applyDefenseModifier(friend, DEFENSE_INCREASE)
+        this.getAllFriendlyUnits().forEach(friend => {
+            this.applyDefenseModifier(friend, DEFENSE_MODIFIER)
         })
 
-        const nameSelf = this.name || "Shaman"
-
-        const combatHitStrings = [
-            `${nameSelf} places a protective totem at the ground increasing the defensive capabilities of all allied units!`
-        ]
-
-        return combatHitStrings[Math.floor(Math.random() * combatHitStrings.length)]
+        return this.generateCombatString(protectiveTotem)
     }
 }
 

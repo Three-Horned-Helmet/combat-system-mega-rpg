@@ -6,20 +6,48 @@
     },
     "abilities": {
         "fireball": {
+            "name": "fireball",
+            "description": "Hurls a ball of fire towards a targeted enemy dealing damage instantly and over time",
+            "combatHitStrings": [
+                "${nameSelf} hurls a ball of fire towards ${nameEnemy} dealing ${damageDealt} damage!"
+            ],
+            "combatCriticalStrings": [
+                "${nameSelf} hurls a massive ball of fire to critically hit ${nameEnemy} for ${damageDealt} damage completely frying it in the process!"
+            ],
+            "combatMissStrings": [
+                "${nameSelf}'s fireball evaporates in the air missing ${nameEnemy}!"
+            ],
             "DAMAGE_SPREAD": 0.3,
             "MISS_CHANCE": 0.2,
             "CRIT_CHANCE": 0.1,
             "BASE_DAMAGE": 15,
-            "DAMAGE_MULTIPLIER": 0.7
+            "DAMAGE_MULTIPLIER": 0.7,
+            "DOT": "fireballDot"
         },
         "fireballDot": {
+            "name": "fireball DOT",
+            "combatHitStrings": [
+                "${nameSelf}'s fireball continues to burn ${nameEnemy} for ${damageDealt} damage!"
+            ],
+            "DURATION": 2,
             "DAMAGE_SPREAD": 0.1,
             "MISS_CHANCE": 0,
-            "CRIT_CHANCE": 5,
+            "CRIT_CHANCE": 0,
             "BASE_DAMAGE": 5,
             "DAMAGE_MULTIPLIER": 0.2
         },
         "arcaneblast": {
+            "name": "arcane blast",
+            "description": "Channels an arcane blast at the target location capable of dealing massive damage",
+            "combatHitStrings": [
+                "${nameSelf} conjures an arcane blast at ${nameEnemy}'s location dealing ${damageDealt} damage!"
+            ],
+            "combatCriticalStrings": [
+                "${nameSelf} channels all power to create a devastating arcane blast dealing ${damageDealt} critical damage to ${nameEnemy}!"
+            ],
+            "combatMissStrings": [
+                "${nameSelf}'s arcane blast misses ${nameEnemy} by an inch!"
+            ],
             "DAMAGE_SPREAD": 0.5,
             "MISS_CHANCE": 0.2,
             "CRIT_CHANCE": 0.1,
@@ -27,9 +55,19 @@
             "DAMAGE_MULTIPLIER": 1
         },
         "arcaneConcentration": {
-            "ATTACK_INCREASE": 0.4
+            "name": "arcane concentration",
+            "description": "Meditates to increase the power of all damaging attacks for the rest of the fight",
+            "combatHitStrings": [
+                "${nameSelf} meditates to increase its powers for the rest of the fight!"
+            ],
+            "ATTACK_MODIFIER": 0.4
         },
         "rainOfFire": {
+            "name": "rain of fire",
+            "description": "Summons a rain of fire upon all enemies",
+            "combatHitStrings": [
+                "${nameSelf} channels a rain of fire on the battlefield ${damagesString}!"
+            ],
             "DAMAGE_SPREAD": 0.3,
             "MISS_CHANCE": 0.2,
             "CRIT_CHANCE": 0.0,

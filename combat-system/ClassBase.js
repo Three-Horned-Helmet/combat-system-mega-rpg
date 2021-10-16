@@ -1,5 +1,9 @@
-class ClassBase {
+const { AbilityEngine } = require("./AbilityEngine")
+
+class ClassBase extends AbilityEngine {
     constructor(game, owner, team = 1){
+        super()
+
         const { health, currentHealth, attack, defense, rank = null } = owner.hero
 
         this.game = game
@@ -22,7 +26,7 @@ class ClassBase {
 
     getRandomAbilities = (numberOfAbilities = 2) => {
         const abilities = this.abilities()
-        const abilityKeys = Object.keys(abilities)
+        const abilityKeys = Object.keys(abilities).filter(a => !abilities[a].notAnAbility)
         const randomAbilities = []
 
         for(let i = 0; i < numberOfAbilities; i++){
@@ -38,20 +42,6 @@ class ClassBase {
 
     initiate = () => {
         this._applyClassModifiers()
-    }
-
-    _applyCombatEffect = (ability, target) => {
-        this.combatEffects.push({...ability, fromRound: this.game.round, effectTarget: target})
-    }
-
-    _applyClassModifiers = () => {
-        this.initiative = this.initiative * (this.classInitiativeModifier || 1)
-        this.attack = this.attack * (this.classAttackModifier || 1)
-        this.defense = this.defense * (this.classDefenseModifier || 1)
-    }
-
-    _getAliveMembersFromTeam = (team = this.team) => {
-        return this.game.combatTimeline.filter(unit => unit.team === team)
     }
 
     getRandomEnemy = () => {
@@ -115,14 +105,12 @@ class ClassBase {
     }
 
     applyAttackModifier = (target, modifier) => {
+        if(!modifier) return
+
         const MIN_MODIFIER = 0.4
         const MAX_MODIFIER = 2.5
 
-        if(target.attackModifier !== 1){
-            target.attackModifier = target.attackModifier + modifier - 1
-        } else {
-            target.attackModifier += modifier
-        }
+        target.attackModifier += modifier
 
         if(target.attackModifier < MIN_MODIFIER) target.attackModifier = MIN_MODIFIER
         else if(target.attackModifier > MAX_MODIFIER) target.attackModifier = MAX_MODIFIER
@@ -131,24 +119,36 @@ class ClassBase {
     }
 
     applyDefenseModifier = (target, modifier) => {
+        if(!modifier) return
+
         const MIN_MODIFIER = 0.4
         const MAX_MODIFIER = 2.5
 
-        if(target.defenseModifier !== 1){
-            target.defenseModifier = target.defenseModifier + modifier - 1
-        } else {
-            target.defenseModifier += modifier
-        }
+        target.defenseModifier += modifier
 
         if(target.defenseModifier < MIN_MODIFIER) target.defenseModifier = MIN_MODIFIER
         else if(target.defenseModifier > MAX_MODIFIER) target.defenseModifier = MAX_MODIFIER
 
-        return true
+        return target.defenseModifier
     }
 
     applyCombatModifiersToDamage = (target, damage) => {
         const newDamage = damage * (this.attackModifier / target.defenseModifier)
         return newDamage
+    }
+
+    applyCombatEffect = (ability, target) => {
+        this.combatEffects.push({...ability, fromRound: this.game.round, effectTarget: target})
+    }
+
+    _applyClassModifiers = () => {
+        this.initiative = this.initiative * (this.classInitiativeModifier || 1)
+        this.attack = this.attack * (this.classAttackModifier || 1)
+        this.defense = this.defense * (this.classDefenseModifier || 1)
+    }
+
+    _getAliveMembersFromTeam = (team = this.team) => {
+        return this.game.combatTimeline.filter(unit => unit.team === team)
     }
 }
 

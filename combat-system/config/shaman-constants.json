@@ -6,6 +6,17 @@
     },
     "abilities": {
         "lightningBolt": {
+            "name": "lightning bolt",
+            "description": "Channels a bolt of lightning towards a targeted enemy",
+            "combatHitStrings": [
+                "${nameSelf} hurls a lightning bolt towards ${nameEnemy} dealing ${damageDealt} damage!"
+            ],
+            "combatCriticalStrings": [
+                "${nameSelf} channels a massive bolt of lightning that critical hits and completely fry ${nameEnemy} for ${damageDealt} damage!"
+            ],
+            "combatMissStrings": [
+                "${nameSelf}'s ligning bolt misses ${nameEnemy} and evaporates in the air!"
+            ],
             "DAMAGE_SPREAD": 0.4,
             "MISS_CHANCE": 0.1,
             "CRIT_CHANCE": 0.2,
@@ -13,6 +24,17 @@
             "DAMAGE_MULTIPLIER": 0.7
         },
         "naturesRemedy": {
+            "name": "natures remedy",
+            "description": "Summons the natures remedies tp heal a targeted friendly target",
+            "combatHitStrings": [
+                "${nameSelf} summons the natures remedy to nurture ${nameFriend}'s wounds healing ${healingDealt} damage!"
+            ],
+            "combatCriticalStrings": [
+                "${nameSelf} channels the ancient spirits of the nature to critically heal ${nameFriend} for ${healingDealt} damage!"
+            ],
+            "combatMissStrings": [
+                "${nameSelf} is unable to connect with the nature and a mild windy breeze just passes by doing absolutely nothing..."
+            ],
             "HEALING_SPREAD": 0.6,
             "MISS_CHANCE": 0.1,
             "CRIT_CHANCE": 0.15,
@@ -20,6 +42,11 @@
             "HEALING_MULTIPLIER": 1
         },
         "healingRain": {
+            "name": "healing rain",
+            "description": "Conjures soothing rain healing all friendly units",
+            "combatHitStrings": [
+                "${nameSelf} conjures soothing rain healing ${healingString}!"
+            ],
             "HEALING_SPREAD": 0.2,
             "MISS_CHANCE": 0.2,
             "CRIT_CHANCE": 0.1,
@@ -27,6 +54,11 @@
             "HEALING_MULTIPLIER": 0.4
         },
         "earthquake": {
+            "name": "earthquake",
+            "description": "Channels the hidden powers of the earth causing a massive earthquake damaging all enemies",
+            "combatHitStrings": [
+                "${nameSelf} speaks the words of the earh causing a massive earthquake ${damagesString}!"
+            ],
             "DAMAGE_SPREAD": 0.6,
             "MISS_CHANCE": 0.1,
             "CRIT_CHANCE": 0.1,
@@ -34,7 +66,12 @@
             "DAMAGE_MULTIPLIER": 0.3
         },
         "protectiveTotem": {
-            "DEFENSE_INCREASE": 0.15
+            "name": "protective totem",
+            "description": "Places a totem on the ground that will protect all friendly units on the battlefield",
+            "combatHitStrings": [
+                "${nameSelf} places a protective totem at the ground increasing the defensive capabilities of all allied units!"
+            ],
+            "DEFENSE_MODIFIER": 0.15
         }
     }
 }

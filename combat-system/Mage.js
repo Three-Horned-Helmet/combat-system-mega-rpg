@@ -9,161 +9,68 @@ class Mage extends ClassBase {
         this.className = "Mage"
         this.description = "A powerful mage capable of dealing massive damage to enemies"
         
-        this.classInitiativeModifier = 1
-        this.classAttackModifier = 1.3
-        this.classDefenseModifier = 0.7
+        this.classInitiativeModifier = mageConstants.stats.initiativeModifier
+        this.classAttackModifier = mageConstants.stats.attackModifier
+        this.classDefenseModifier = mageConstants.stats.defenseModifier
     }
 
-    abilities = () => {
-        return {
+    abilities = (ability = null) => {
+        const allAbilities = {
             fireball: {
-                name: "fireball",
-                description: "Hurls a ball of fire towards a targeted enemy dealing damage instantly and over time",
                 cast: this.fireball,
-                combatEffect: this.fireballDot,
-                duration: 2,
-                fromRound: null,
-                effectTarget: null
+                constants: mageConstants.abilities.fireball,
+            },
+            fireballDot: {
+                cast: this.fireballDot,
+                constants: mageConstants.abilities.fireballDot,
+                notAnAbility: true
             },
             arcaneblast: {
-                name: "arcane blast",
-                description: "Channels an arcane blast at the target location capable of dealing massive damage",
-                cast: this.arcaneblast
+                cast: this.arcaneblast,
+                constants: mageConstants.abilities.arcaneblast,
             },
             arcaneConcentration: {
-                name: "arcane concentration",
-                description: "Meditates to increase the power of all damaging attacks for the rest of the fight",
-                cast: this.arcaneConcentration
+                cast: this.arcaneConcentration,
+                constants: mageConstants.abilities.arcaneConcentration,
             },
             rainOfFire: {
-                name: "rain of fire",
-                description: "Summons a rain of fire upon all enemies",
-                cast: this.rainOfFire
+                cast: this.rainOfFire,
+                constants: mageConstants.abilities.rainOfFire,
             }
         }
+
+        return ability ? allAbilities[ability] : allAbilities
     }
     
-    fireball = (target) => {
-        const { DAMAGE_SPREAD, MISS_CHANCE, CRIT_CHANCE, BASE_DAMAGE, DAMAGE_MULTIPLIER } = mageConstants.abilities.fireball
-        
-        const enemy = target || this.getRandomEnemy()
-        const damage = this.applyCombatModifiersToDamage(enemy, BASE_DAMAGE + (this.attack * (this.attack/this.defense) * ((1-DAMAGE_SPREAD/2) + Math.random() * DAMAGE_SPREAD)) * DAMAGE_MULTIPLIER)
-        const attackMissed = Math.random() <= MISS_CHANCE
-        const attackCrit = Math.random() <= CRIT_CHANCE
-        const damageDealt = Math.floor(attackMissed ? 0 : attackCrit ? damage * 2 : damage)
-        const nameSelf = this.name || "Mage"
-        const nameEnemy = enemy.name || "the enemy"
-
-        if(!attackMissed){
-            this.applyDamage(enemy, damageDealt)
-            this._applyCombatEffect(this.abilities().fireball, target)
-        }
-
-        const combatHitStrings = [
-            `${nameSelf} hurls a ball of fire towards ${nameEnemy} dealing ${damageDealt} damage!`
-        ]
-        const combatCriticalStrings = [
-            `${nameSelf} hurls a massive ball of fire to critically hit ${nameEnemy} for ${damageDealt} damage completely frying it in the process!`
-        ]
-        const combatMissStrings = [
-            `${nameSelf}'s fireball evaporates in the air missing ${nameEnemy}!`
-        ]
-
-        if(attackMissed) return combatMissStrings[Math.floor(Math.random() * combatMissStrings.length)]
-        else if(attackCrit) return combatCriticalStrings[Math.floor(Math.random() * combatCriticalStrings.length)]
-        else return combatHitStrings[Math.floor(Math.random() * combatHitStrings.length)]
+    fireball = (target = this.getRandomEnemy()) => {
+        const fireball = this.abilities("fireball")
+        const abilityResponse = this.useBasicDamageAbility(fireball, target)
+        return this.generateCombatString(fireball, abilityResponse)
     }
 
     fireballDot = (target) => {
-        const { DAMAGE_SPREAD, MISS_CHANCE, BASE_DAMAGE, DAMAGE_MULTIPLIER } = mageConstants.abilities.fireballDot
-        
-        const enemy = target || this.getRandomEnemy()
-        const damage = this.applyCombatModifiersToDamage(enemy, BASE_DAMAGE + (this.attack * (this.attack/this.defense) * ((1-DAMAGE_SPREAD/2) + Math.random() * DAMAGE_SPREAD)) * DAMAGE_MULTIPLIER)
-        const attackMissed = Math.random() <= MISS_CHANCE
-        const damageDealt = Math.floor(attackMissed ? 0 : damage)
-        const nameSelf = this.name || "Mage"
-        const nameEnemy = enemy.name || "the enemy"
-
-        this.applyDamage(enemy, damageDealt)
-
-        const combatHitStrings = [
-            `${nameSelf}'s fireball continues to burn ${nameEnemy} for ${damageDealt} damage!`
-        ]
-
-        return combatHitStrings[Math.floor(Math.random() * combatHitStrings.length)]
+        if(!target) return
+        const fireballDot = this.abilities("fireballDot")
+        const abilityResponse = this.useBasicDamageAbility(fireballDot, target)
+        return this.generateCombatString(fireballDot, abilityResponse)
     }
 
-    arcaneblast = (target) => {
-        const { DAMAGE_SPREAD, MISS_CHANCE, CRIT_CHANCE, BASE_DAMAGE, DAMAGE_MULTIPLIER } = mageConstants.abilities.arcaneblast
-        
-        const enemy = target || this.getRandomEnemy()
-        const damage = this.applyCombatModifiersToDamage(enemy, BASE_DAMAGE + (this.attack * (this.attack/this.defense) * ((1-DAMAGE_SPREAD/2) + Math.random() * DAMAGE_SPREAD)) * DAMAGE_MULTIPLIER)
-        const attackMissed = Math.random() <= MISS_CHANCE
-        const attackCrit = Math.random() <= CRIT_CHANCE
-        const damageDealt = Math.floor(attackMissed ? 0 : attackCrit ? damage * 2 : damage)
-        const nameSelf = this.name || "Mage"
-        const nameEnemy = enemy.name || "the enemy"
-
-        if(!attackMissed){
-            this.applyDamage(enemy, damageDealt)
-        }
-
-        const combatHitStrings = [
-            `${nameSelf} conjures an arcane blast at ${nameEnemy}'s location dealing ${damageDealt} damage!`
-        ]
-        const combatCriticalStrings = [
-            `${nameSelf} channels all power to create a devastating arcane blast dealing ${damageDealt} critical damage to ${nameEnemy}!`
-        ]
-        const combatMissStrings = [
-            `${nameSelf}'s arcane blast misses ${nameEnemy} by an inch!`
-        ]
-
-        if(attackMissed) return combatMissStrings[Math.floor(Math.random() * combatMissStrings.length)]
-        else if(attackCrit) return combatCriticalStrings[Math.floor(Math.random() * combatCriticalStrings.length)]
-        else return combatHitStrings[Math.floor(Math.random() * combatHitStrings.length)]
+    arcaneblast = () => {
+        const arcaneblast = this.abilities("arcaneblast")
+        const abilityResponse = this.useBasicDamageAbility(arcaneblast)
+        return this.generateCombatString(arcaneblast, abilityResponse)
     }
 
     arcaneConcentration = () => {
-        const { ATTACK_INCREASE } = mageConstants.abilities.arcaneConcentration
-
-        this.applyAttackModifier(this, ATTACK_INCREASE)
-
-        const nameSelf = this.name || "Mage"
-
-        const combatHitStrings = [
-            `${nameSelf} meditates to increase its powers for the rest of the fight!`
-        ]
-
-        return combatHitStrings[Math.floor(Math.random() * combatHitStrings.length)]
+        const arcaneConcentration = this.abilities("arcaneConcentration")
+        const abilityResponse = this.useBasicDamageModifierAbility(arcaneConcentration, this)
+        return this.generateCombatString(arcaneConcentration, abilityResponse)
     }
 
     rainOfFire = () => {
-        const { DAMAGE_SPREAD, MISS_CHANCE, CRIT_CHANCE, BASE_DAMAGE, DAMAGE_MULTIPLIER } = mageConstants.abilities.rainOfFire
-        
-        const enemies = this.getAllEnemies()
-
-        const damagesString = enemies.map(enemy => {
-            const damage = this.applyCombatModifiersToDamage(enemy, BASE_DAMAGE + (this.attack * (this.attack / this.defense) * ((1 - DAMAGE_SPREAD / 2) + Math.random() * DAMAGE_SPREAD)) * DAMAGE_MULTIPLIER)
-            const attackMissed = Math.random() <= MISS_CHANCE
-            const attackCrit = Math.random() <= CRIT_CHANCE
-            const damageDealt = Math.floor(attackMissed ? 0 : attackCrit ? damage * 2 : damage)
-
-            const nameEnemy = enemy.name || "the enemy"
-
-            this.applyDamage(enemy, damageDealt)
-
-            if(attackMissed) return ` missing ${nameEnemy},`
-            else if(attackCrit) return ` critical hitting ${nameEnemy} for ${damageDealt},`
-            else return ` hitting ${nameEnemy} for ${damageDealt},`
-        }).join("").trim(",")
-
-        const nameSelf = this.name || "Mage"
-
-        const combatHitStrings = [
-            `${nameSelf} channels a rain of fire on the battlefield ${damagesString}!`
-        ]
-
-        return combatHitStrings[Math.floor(Math.random() * combatHitStrings.length)]
+        const rainOfFire = this.abilities("rainOfFire")
+        const abilityResponse = this.useBasicAreaDamageAbility(rainOfFire)
+        return this.generateCombatString(rainOfFire, abilityResponse)
     }
 }
 

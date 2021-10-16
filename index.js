@@ -1,11 +1,11 @@
 const { askQuestion } = require("./helper")
-const { Game } = require("./combat-system/Game")
+const { GameEngine } = require("./combat-system/GameEngine")
 const { MessageEngine } = require("./combat-system/MessageEngine")
 const {playerOne, playerTwo, playerTree, playerFour} = require("./exampleUsers")
 
 const startGame = async () => {
-    const game = new Game(new MessageEngine(askQuestion), [playerOne], [playerFour])
-    game.startGame()
+    const gameEngine = new GameEngine(new MessageEngine(askQuestion), [playerOne], [playerFour])
+    gameEngine.startGame()
 }
 
 startGame()

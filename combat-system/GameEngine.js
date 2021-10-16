@@ -3,7 +3,7 @@ const { Shaman } = require("./Shaman")
 const { Warrior } = require("./Warrior")
 const { Mage } = require("./Mage")
 
-class Game {
+class GameEngine {
     constructor(MessageAPI, teamOne, teamTwo, options = {}) {
         const { maxRounds = 5 } = options
         this.maxRounds = maxRounds
@@ -84,9 +84,10 @@ class Game {
         this.combatTimeline.forEach(unit => {
             if(unit.combatEffects.length){
                 unit.combatEffects = unit.combatEffects.map(effect => {
-                    const stringRes = effect.combatEffect(effect.effectTarget)
+                    const { DURATION, FROM_ROUND } = effect.constants
+                    const stringRes = effect.cast(effect.effectTarget)
                     this.MessageAPI.generateEffectMessage(stringRes)
-                    if(this.round >= (effect.fromRound + effect.duration)){
+                    if(this.round >= (FROM_ROUND + DURATION)){
                         return null
                     } else {
                         return effect
@@ -147,4 +148,4 @@ class Game {
     }
 }
 
-module.exports = { Game }
+module.exports = { GameEngine }
