@@ -1,5 +1,5 @@
-const { ClassBase } = require("./ClassBase")
-const mageConstants = require("./config/mage-constants.json")
+const { ClassBase } = require("../ClassBase")
+const mageConstants = require("../config/mage-constants.json")
 
 
 class Mage extends ClassBase {

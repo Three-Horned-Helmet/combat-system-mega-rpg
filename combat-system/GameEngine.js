@@ -1,7 +1,7 @@
-const { Ranger } = require("./Ranger")
-const { Shaman } = require("./Shaman")
-const { Warrior } = require("./Warrior")
-const { Mage } = require("./Mage")
+const { Ranger } = require("./classes/Ranger")
+const { Shaman } = require("./classes/Shaman")
+const { Warrior } = require("./classes/Warrior")
+const { Mage } = require("./classes/Mage")
 
 class GameEngine {
     constructor(MessageAPI, teamOne, teamTwo, options = {}) {

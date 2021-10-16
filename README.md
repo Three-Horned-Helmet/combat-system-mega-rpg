@@ -12,3 +12,8 @@
 - $ npm adduser
 ## Publish
 - $ npm publish --access public
+
+
+# Add a new class
+- Create a class (see /combat-system/classes)
+- Add the class to classList in GameEngine
