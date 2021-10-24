@@ -15,8 +15,17 @@ class GameEngine {
         const { maxRounds = 5 } = options
         this.maxRounds = maxRounds
 
-        this.teamOne = teamOne // []
-        this.teamTwo = teamTwo // []
+        this.classList = {
+            Ranger,
+            Shaman,
+            Warrior,
+            Mage
+        }
+
+        this.teamOne = null 
+        this.teamTwo = null 
+        this.originalTeamOne = teamOne // []
+        this.originalTeamTwo = teamTwo // []
         this.MessageAPI = MessageAPI
 
         this.round = 1
@@ -24,13 +33,6 @@ class GameEngine {
         this.combatTimeline = []
         this.gameEnded = false
         this.deadUnits = []
-
-        this.classList = {
-            Ranger,
-            Shaman,
-            Warrior,
-            Mage
-        }
     }
 
     startGame = async () => {
@@ -111,15 +113,17 @@ class GameEngine {
             return classInstance
         }
 
-        this.teamOne = this.teamOne.map(user => {
+        this.teamOne = this.originalTeamOne.map(user => {
             return mapUsers(user, 1)
         })
 
-        this.teamTwo = this.teamTwo.map(user => {
+        this.teamTwo = this.originalTeamTwo.map(user => {
             return mapUsers(user, 2)
         })
 
         this._sortCombatTimeline()
+
+        this.MessageAPI.game = this
     }
 
     _initiateClass = (classUnit) => {

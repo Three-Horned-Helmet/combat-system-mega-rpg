@@ -6,6 +6,7 @@ class ClassBase extends AbilityEngine {
 
         const { health, currentHealth, attack, defense, rank = null } = owner.hero
 
+        this.id = owner.id || owner.account?.userId
         this.game = game
         this.owner = owner
         this.team = team
