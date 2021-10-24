@@ -1,12 +1,11 @@
 {
   "name": "@three-horned-helmet/combat-system-mega-rpg",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "main": "index.js",
   "scripts": {
     "debug": "nodemon --inspect index.js",
     "dev": "nodemon ./dev/dev.js",
-    "postinstall": "sh postinstall.sh",
     "start": "node ./dev/dev.js",
     "test": "export NODE_ENV=test && nyc mocha --exit './test/**/*.test.js'"
   },

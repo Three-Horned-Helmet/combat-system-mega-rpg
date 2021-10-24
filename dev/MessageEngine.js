@@ -1,6 +1,6 @@
 class MessageEngine  {
-    constructor(messageAPI) {
-        this.messageAPI = messageAPI
+    constructor(channel) {
+        this.channel = channel
     }
 
     pickAbilityMessage = async (player, abilities) => {
@@ -15,7 +15,7 @@ class MessageEngine  {
 
         while(!ability && !pickAbilityTimeout){
             // TODO GIVE A TIME FOR THEIR RESPONSE
-            const playerResponse = await this.messageAPI(abilitiesString)
+            const playerResponse = await this.channel(abilitiesString)
             const indexOfPlayerResponse = allLetters.indexOf(playerResponse[0])
             ability = abilities[indexOfPlayerResponse]
         }
