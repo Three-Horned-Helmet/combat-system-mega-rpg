@@ -12,6 +12,7 @@ class GameEngine {
         newRoundMessage: (round) => {},
         endGameMessage: (winningTeam) => {}
     }, teamOne, teamTwo, options = {}) {
+        MessageAPI.game = this
         const { maxRounds = 5 } = options
         this.maxRounds = maxRounds
 
@@ -122,8 +123,6 @@ class GameEngine {
         })
 
         this._sortCombatTimeline()
-
-        this.MessageAPI.game = this
     }
 
     _initiateClass = (classUnit) => {
