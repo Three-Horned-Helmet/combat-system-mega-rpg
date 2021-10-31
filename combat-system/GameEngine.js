@@ -13,6 +13,7 @@ class GameEngine {
         endGameMessage: (winningTeam) => {}
     }, teamOne, teamTwo, options = {}) {
         MessageAPI.game = this
+
         const { maxRounds = 5 } = options
         this.maxRounds = maxRounds
 
@@ -61,10 +62,11 @@ class GameEngine {
             if(this.gameEnded){
                 return this._endGame()
             }
-
             this.currentTurn += 1
             await this._newCombatRound()
         }
+
+        return this._endGame(true)
     }
 
     unitDied = (unit) => {
@@ -149,16 +151,24 @@ class GameEngine {
         return (unit.initiative * ((unit.rank || 1) / 2)) * unit.initiativeModifier
     }
 
-    _endGame = () => {
+    _endGame = (draw) => {
+        console.log("ENDING GAME")
+        if(this.gameIsEnding) return
+        this.gameIsEnding = true
         this.gameEnded = true
+        if(draw) {
+            console.log("ENDING GAME MESSAGE API DRAW")
+            return this.MessageAPI.endGameMessage(null)
+        }
         const winningTeam = this._decideWinningTeam()
+        console.log("ENDING GAME MESSAGE API")
         this.MessageAPI.endGameMessage(winningTeam)
     }
 
     _decideWinningTeam = () => {
         const teamOne = this.combatTimeline.filter(u => u.team === 1)
-        if(teamOne.length === this.combatTimeline.length) return this.teamOne
-        else if(!teamOne.length) return this.teamTwo
+        if(teamOne.length === this.combatTimeline.length) return this.originalTeamOne
+        else if(!teamOne.length) return this.originalTeamTwo
         else return null
     }
 }

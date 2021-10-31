@@ -11,7 +11,7 @@ class ClassBase extends AbilityEngine {
         this.owner = owner
         this.team = team
         this.name = owner.name || owner.account?.username || "NPC"
-        this.npc = owner.npc
+        this.isNpc = owner.isNpc
         this.health = health
         this.currentHealth = currentHealth
         this.attack = attack
