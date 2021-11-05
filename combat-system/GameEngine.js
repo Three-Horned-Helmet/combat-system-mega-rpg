@@ -44,7 +44,7 @@ class GameEngine {
             const currentUnit = this.combatTimeline[this.currentTurn]
             const randomAbilities = currentUnit.getRandomAbilities()
             let usedAbilityRes = ""
-            if(currentUnit.npc){
+            if(currentUnit.isNpc){
                 usedAbilityRes = randomAbilities[Math.floor(Math.random() * randomAbilities.length)].cast()
             } else {
                 const chosenAbility = await this.MessageAPI.pickAbilityMessage(currentUnit, randomAbilities)
@@ -151,17 +151,11 @@ class GameEngine {
         return (unit.initiative * ((unit.rank || 1) / 2)) * unit.initiativeModifier
     }
 
-    _endGame = (draw) => {
-        console.log("ENDING GAME")
+    _endGame = () => {
         if(this.gameIsEnding) return
         this.gameIsEnding = true
         this.gameEnded = true
-        if(draw) {
-            console.log("ENDING GAME MESSAGE API DRAW")
-            return this.MessageAPI.endGameMessage(null)
-        }
         const winningTeam = this._decideWinningTeam()
-        console.log("ENDING GAME MESSAGE API")
         this.MessageAPI.endGameMessage(winningTeam)
     }
 
