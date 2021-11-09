@@ -29,12 +29,16 @@ class GameEngine {
         this.originalTeamOne = teamOne // []
         this.originalTeamTwo = teamTwo // []
         this.MessageAPI = MessageAPI
-
+        
         this.round = 1
         this.currentTurn = 0
         this.combatTimeline = []
         this.gameEnded = false
         this.deadUnits = []
+        
+        this.combatEndedReason = ""
+        this.winningTeam = null
+        this.losingTeam = null
     }
 
     startGame = async () => {
@@ -161,8 +165,16 @@ class GameEngine {
 
     _decideWinningTeam = () => {
         const teamOne = this.combatTimeline.filter(u => u.team === 1)
-        if(teamOne.length === this.combatTimeline.length) return this.originalTeamOne
-        else if(!teamOne.length) return this.originalTeamTwo
+        if(teamOne.length === this.combatTimeline.length) {
+            this.winningTeam = this.originalTeamOne
+            this.losingTeam = this.originalTeamTwo
+            return this.originalTeamOne
+        }
+        else if(!teamOne.length) {
+            this.winningTeam = this.originalTeamTwo
+            this.losingTeam = this.originalTeamOne
+            return this.originalTeamTwo
+        }
         else return null
     }
 }
