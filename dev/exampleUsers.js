@@ -9,7 +9,6 @@ const playerOne = {
         currentHealth: 200,
         attack: 30,
         defense: 30,
-        className: "Warrior"
     }
 }
 

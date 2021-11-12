@@ -1,0 +1,83 @@
+{
+    "stats": {
+        "initiativeModifier": 1,
+        "attackModifier": 1,
+        "defenseModifier": 1
+    },
+    "abilities": {
+        "hit": {
+            "name": "hit",
+            "description": "Hit the enemy",
+            "combatHitStrings": [
+                "${nameSelf} hits ${nameEnemy} dealing ${damageDealt} damage!"
+            ],
+            "combatCriticalStrings": [
+                "${nameSelf} hits ${nameEnemy} with a great strike critical hitting ${damageDealt} damage!"
+            ],
+            "combatMissStrings": [
+                "${nameSelf}'s hits missed ${nameEnemy} with their hit!"
+            ],
+            "DAMAGE_SPREAD": 0.1,
+            "MISS_CHANCE": 0.2,
+            "CRIT_CHANCE": 0.2,
+            "BASE_DAMAGE": 10,
+            "DAMAGE_MULTIPLIER": 1
+        },
+        "bodySlam": {
+            "name": "body slam",
+            "description": "Body slams the target",
+            "combatHitStrings": [
+                "${nameSelf} body slams ${nameEnemy} dealing ${damageDealt} damage!"
+            ],
+            "combatCriticalStrings": [
+                "${nameSelf} body slams ${nameEnemy} crushing their bones with a critical hit dealing ${damageDealt} damage!"
+            ],
+            "combatMissStrings": [
+                "${nameSelf} runs towards ${nameEnemy} but misses its body slam!"
+            ],
+            "DAMAGE_SPREAD": 0.4,
+            "MISS_CHANCE": 0.3,
+            "CRIT_CHANCE": 0.3,
+            "CRIT_MULTIPLIER": 2.2,
+            "BASE_DAMAGE": 20,
+            "DAMAGE_MULTIPLIER": 0.8
+        },
+        "crush": {
+            "name": "crush",
+            "description": "Crushes the enemy",
+            "combatHitStrings": [
+                "${nameSelf} crushes ${nameEnemy} dealing ${damageDealt} damage and increasing the damage it takes for the remaining fight!"
+            ],
+            "combatMissStrings": [
+                "${nameSelf}'s hits missed ${nameEnemy} with their crushing hit!"
+            ],
+            "DAMAGE_SPREAD": 0.2,
+            "MISS_CHANCE": 0,
+            "CRIT_CHANCE": 0,
+            "BASE_DAMAGE": 5,
+            "DAMAGE_MULTIPLIER": 0.6,
+            "DEFENSE_MODIFIER": -0.2
+        },
+        "massiveSwing": {
+            "name": "massive swing",
+            "description": "A massive swing hitting multiple enemies",
+            "combatHitStrings": [
+                "${nameSelf} swings violently around itself ${damagesString}!"
+            ],
+            "DAMAGE_SPREAD": 0.2,
+            "MISS_CHANCE": 0.1,
+            "CRIT_CHANCE": 0.1,
+            "BASE_DAMAGE": 10,
+            "DAMAGE_MULTIPLIER": 0.7,
+            "TARGET_ENEMIES": 2
+        },
+        "protect": {
+            "name": "protect",
+            "description": "Takes a defensive stance to protect against damage",
+            "combatHitStrings": [
+                "${nameSelf} takes a defensive stance significantly decreases damage taken!"
+            ],
+            "DEFENSE_MODIFIER": 0.6
+        }
+    }
+}

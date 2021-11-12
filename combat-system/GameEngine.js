@@ -2,6 +2,7 @@ const { Ranger } = require("./classes/Ranger")
 const { Shaman } = require("./classes/Shaman")
 const { Warrior } = require("./classes/Warrior")
 const { Mage } = require("./classes/Mage")
+const { DefaultClass } = require("./classes/DefaultClass")
 
 class GameEngine {
     constructor(MessageAPI = {
@@ -18,10 +19,11 @@ class GameEngine {
         this.maxRounds = maxRounds
 
         this.classList = {
+            DefaultClass,
             Ranger,
             Shaman,
             Warrior,
-            Mage
+            Mage,
         }
 
         this.teamOne = null 
@@ -113,7 +115,7 @@ class GameEngine {
 
     _initiateGame = () => {
         const mapUsers = (user, team) => {
-            const classToInitiate = this.classList[Object.keys(this.classList).find(classKey => classKey === user.hero?.className)]
+            const classToInitiate = this.classList[Object.keys(this.classList).find(classKey => classKey === user.hero?.className)] || this.classList.DefaultClass
             const classInstance = new classToInitiate(this, user, team)
             this._initiateClass(classInstance)
 

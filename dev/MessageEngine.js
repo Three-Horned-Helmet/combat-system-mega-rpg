@@ -47,7 +47,7 @@ class MessageEngine  {
     }
 
     endGameMessage = async (winningTeam) => {
-        console.log("END GAME! Winner is " + winningTeam ? winningTeam.map(u => u.name).join(" ") : "none")
+        console.log("END GAME! Winner is " + (winningTeam ? winningTeam.map(u => u.name).join(" ") : "none"))
         return process.exit()
     }
 }
