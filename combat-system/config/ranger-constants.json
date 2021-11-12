@@ -52,6 +52,9 @@
         },
         "poisonedArrowDot": {
             "name": "poisoned arrow DOT",
+            "combatHitStrings": [
+                "${nameEnemy} takes ${damageDealt} damage from ${nameSelf}!"
+            ],
             "DURATION": 3,
             "DAMAGE_SPREAD": 0.1,
             "MISS_CHANCE": 0,

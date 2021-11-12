@@ -88,7 +88,7 @@ class ClassBase extends AbilityEngine {
     // Returns true if target is alive
     applyDamage = async (target, damage) => {
         target.currentHealth -= Math.floor(damage)
-        if(target.save) target.save()
+        // if(target.owner?.save) target.owner.save()
 
         if(target.currentHealth <= 0) {
             this.game.unitDied(target)
@@ -100,7 +100,7 @@ class ClassBase extends AbilityEngine {
     applyHealing = async (target, healing) => {
         target.currentHealth += Math.floor(healing)
         if(target.currentHealth > target.health) target.currentHealth = target.health
-        if(target.save) await target.save()
+        // if(target.owner?.save) await target.owner.save()
 
         return true
     }

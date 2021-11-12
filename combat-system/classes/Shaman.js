@@ -105,7 +105,7 @@ class Shaman extends ClassBase {
     earthquake = () => {
         const earthquake = this.abilities("earthquake")
         const abilityResponse = this.useBasicAreaDamageAbility(earthquake)
-        return this.generateCombatString(rainOfFire, abilityResponse)
+        return this.generateCombatString(earthquake, abilityResponse)
     }
 
     protectiveTotem = () => {
