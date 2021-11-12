@@ -1,0 +1,93 @@
+{
+    "stats": {
+        "initiativeModifier": 0.8,
+        "attackModifier": 0.3,
+        "defenseModifier": 0.3
+    },
+    "abilities": {
+        "weaponSwing": {
+            "name": "weapon swing",
+            "description": "Swings their weapons against the enemy",
+            "combatHitStrings": [
+                "A unit in ${nameSelf} takes a swing against ${nameEnemy} dealing ${damageDealt} damage!"
+            ],
+            "combatCriticalStrings": [
+                "A unit in ${nameSelf} swings its weapon against ${nameEnemy} dealing a critical strike for ${damageDealt} damage!"
+            ],
+            "combatMissStrings": [
+                "A unit in ${nameSelf} swings its weapon against ${nameEnemy} but misses!"
+            ],
+            "DAMAGE_SPREAD": 0.2,
+            "MISS_CHANCE": 0.2,
+            "CRIT_CHANCE": 0.2,
+            "BASE_DAMAGE": 10,
+            "DAMAGE_MULTIPLIER": 1
+        },
+        "drawArrow": {
+            "name": "draw arrow",
+            "description": "Fires an arrow against an enemy",
+            "combatHitStrings": [
+                "A unit in ${nameSelf} fires an arrow against ${nameEnemy} dealing ${damageDealt} damage!"
+            ],
+            "combatCriticalStrings": [
+                "Units in ${nameSelf} fires several arrows hitting ${nameEnemy} dealing ${damageDealt} critical damage!"
+            ],
+            "combatMissStrings": [
+                "A unit in ${nameSelf} fires an arrow against ${nameEnemy} but misses!"
+            ],
+            "DAMAGE_SPREAD": 0.2,
+            "MISS_CHANCE": 0.3,
+            "CRIT_CHANCE": 0.3,
+            "CRIT_MULTIPLIER": 2.3,
+            "BASE_DAMAGE": 15,
+            "DAMAGE_MULTIPLIER": 0.8
+        },
+        "charge": {
+            "name": "charge",
+            "description": "Charges the enemy",
+            "combatHitStrings": [
+                "${nameSelf} charges ${nameEnemy} dealing ${damageDealt} damage!"
+            ],
+            "combatCriticalStrings": [
+                "${nameSelf} charges ${nameEnemy} dealing ${damageDealt} critical damage!"
+            ],
+            "combatMissStrings": [
+                "${nameSelf} charges ${nameEnemy} but misses!"
+            ],
+            "DAMAGE_SPREAD": 0.4,
+            "MISS_CHANCE": 0.2,
+            "CRIT_CHANCE": 0.2,
+            "BASE_DAMAGE": 15,
+            "DAMAGE_MULTIPLIER": 1
+        },
+        "volleyOfArrows": {
+            "name": "volley of arrows",
+            "description": "A volley of arrows is fired against the enemies",
+            "combatHitStrings": [
+                "${nameSelf} fires a volley of arrows ${damagesString}!"
+            ],
+            "DAMAGE_SPREAD": 0.2,
+            "MISS_CHANCE": 0.1,
+            "CRIT_CHANCE": 0.1,
+            "BASE_DAMAGE": 10,
+            "DAMAGE_MULTIPLIER": 0.45,
+            "TARGET_ENEMIES": 5
+        },
+        "rally": {
+            "name": "rally",
+            "description": "Rallies to increase its attack for the remaining fight",
+            "combatHitStrings": [
+                "${nameSelf} rallies to significantly increase damage dealt!"
+            ],
+            "ATTACK_MODIFIER": 0.4
+        },
+        "defensiveFormation": {
+            "name": "defensive formation",
+            "description": "Takes up a defensive formation to increase its defensive capabilities for the remaining fight",
+            "combatHitStrings": [
+                "${nameSelf} takes a defensive formation to decrease damage taken for the remaining fight!"
+            ],
+            "DEFENSE_MODIFIER": 0.6
+        }
+    }
+}

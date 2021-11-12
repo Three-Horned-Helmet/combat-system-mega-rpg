@@ -1,8 +1,9 @@
+const { DefaultClass } = require("./classes/DefaultClass")
+const { UserArmy } = require("./classes/NPC/UserArmy")
 const { Ranger } = require("./classes/Ranger")
 const { Shaman } = require("./classes/Shaman")
 const { Warrior } = require("./classes/Warrior")
 const { Mage } = require("./classes/Mage")
-const { DefaultClass } = require("./classes/DefaultClass")
 
 class GameEngine {
     constructor(MessageAPI = {
@@ -20,6 +21,7 @@ class GameEngine {
 
         this.classList = {
             DefaultClass,
+            UserArmy,
             Ranger,
             Shaman,
             Warrior,

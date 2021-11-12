@@ -9,6 +9,7 @@ const playerOne = {
         currentHealth: 200,
         attack: 30,
         defense: 30,
+        className: "UserArmy"
     }
 }
 
@@ -57,4 +58,33 @@ const playerFour = {
     }
 }
 
-module.exports = { playerOne, playerTwo, playerTree, playerFour }
+const playerFive = {
+    _id: "p-4",
+    account: {
+        username: "Player Five"
+    },
+    hero: {
+        rank: 3,
+        health: 180,
+        currentHealth: 180,
+        attack: 30,
+        defense: 30
+    }
+}
+
+const userArmy = {
+    _id: "p-1",
+    account: {
+        username: "User Army"
+    },
+    hero: {
+        rank: 3,
+        health: 900,
+        currentHealth: 900,
+        attack: 100,
+        defense: 100,
+        className: "UserArmy"
+    }
+}
+
+module.exports = { playerOne, playerTwo, playerTree, playerFour, playerFive, userArmy }
