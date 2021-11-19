@@ -5,39 +5,34 @@ class UserArmy extends ClassBase {
     constructor(game, owner, team = 1){
         super(game, owner, team)
 
-        this.className = "UserArmy"
-        this.description = "User Army"
-
-        this.classInitiativeModifier = userArmyConstants.stats.initiativeModifier
-        this.classAttackModifier = userArmyConstants.stats.attackModifier
-        this.classDefenseModifier = userArmyConstants.stats.defenseModifier
+        Object.keys(userArmyConstants).forEach(key => this[key] = userArmyConstants[key])
     }
 
     abilities = (ability = null) => {
         const allAbilities = {
             weaponSwing: {
                 cast: this.weaponSwing,
-                constants: userArmyConstants.abilities.weaponSwing
+                constants: userArmyConstants.abilityConstants.weaponSwing
             },
             drawArrow: {
                 cast: this.drawArrow,
-                constants: userArmyConstants.abilities.drawArrow
+                constants: userArmyConstants.abilityConstants.drawArrow
             },
             charge: {
                 cast: this.charge,
-                constants: userArmyConstants.abilities.charge
+                constants: userArmyConstants.abilityConstants.charge
             },
             volleyOfArrows: {
                 cast: this.volleyOfArrows,
-                constants: userArmyConstants.abilities.volleyOfArrows
+                constants: userArmyConstants.abilityConstants.volleyOfArrows
             },
             rally: {
                 cast: this.rally,
-                constants: userArmyConstants.abilities.rally
+                constants: userArmyConstants.abilityConstants.rally
             },
             defensiveFormation: {
                 cast: this.defensiveFormation,
-                constants: userArmyConstants.abilities.defensiveFormation
+                constants: userArmyConstants.abilityConstants.defensiveFormation
             }
         }
 

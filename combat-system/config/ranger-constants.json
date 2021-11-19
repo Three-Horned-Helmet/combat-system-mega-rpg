@@ -1,10 +1,13 @@
 {
+    "className": "Ranger",
+    "canBePicked": true,
+    "description": "An adaptable fighter specializing in ranged attacks",
     "stats": {
         "initiativeModifier": 3,
         "attackModifier": 1.1,
         "defenseModifier": 0.9
     },
-    "abilities": {
+    "abilityConstants": {
         "piercingArrow": {
             "name": "piercing arrow",
             "description": "Shoots a very accurate arrow towards a target",

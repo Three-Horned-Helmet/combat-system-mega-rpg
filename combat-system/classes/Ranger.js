@@ -5,36 +5,31 @@ class Ranger extends ClassBase {
     constructor(game, owner, team = 1){
         super(game, owner, team)
 
-        this.className = "Ranger"
-        this.description = "An adaptable fighter specializing in ranged attacks"
-
-        this.classInitiativeModifier = rangerConstants.stats.initiativeModifier
-        this.classAttackModifier = rangerConstants.stats.attackModifier
-        this.classDefenseModifier = rangerConstants.stats.defenseModifier
+        Object.keys(rangerConstants).forEach(key => this[key] = rangerConstants[key])
     }
 
     abilities = (ability = null) => {
         const allAbilities = {
             piercingArrow: {
                 cast: this.piercingArrow,
-                constants: rangerConstants.abilities.piercingArrow,
+                constants: rangerConstants.abilityConstants.piercingArrow,
             },
             exposeArmor: {
                 cast: this.exposeArmor,
-                constants: rangerConstants.abilities.exposeArmor,
+                constants: rangerConstants.abilityConstants.exposeArmor,
             },
             poisonedArrow: {
                 cast: this.poisonedArrow,
-                constants: rangerConstants.abilities.poisonedArrow,
+                constants: rangerConstants.abilityConstants.poisonedArrow,
             },
             poisonedArrowDot: {
                 cast: this.poisonedArrowDot,
-                constants: rangerConstants.abilities.poisonedArrowDot,
+                constants: rangerConstants.abilityConstants.poisonedArrowDot,
                 notAnAbility: true
             },
             killingArrow: {
                 cast: this.killingArrow,
-                constants: rangerConstants.abilities.killingArrow,
+                constants: rangerConstants.abilityConstants.killingArrow,
             }
         }
 

@@ -1,10 +1,13 @@
 {
+    "className": "UserArmy",
+    "canBePicked": false,
+    "description": "User army",
     "stats": {
         "initiativeModifier": 0.8,
         "attackModifier": 0.3,
         "defenseModifier": 0.3
     },
-    "abilities": {
+    "abilityConstants": {
         "weaponSwing": {
             "name": "weapon swing",
             "description": "Swings their weapons against the enemy",

@@ -1,10 +1,13 @@
 {
+    "className": "Warrior",
+    "canBePicked": true,
+    "description": "A ruthless Warrior that hits before it thinks!",
     "stats": {
         "initiativeModifier": 2,
         "attackModifier": 0.8,
         "defenseModifier": 1.2
     },
-    "abilities": {
+    "abilityConstants": {
         "slam": {
             "name": "slam",
             "description": "Slams the target with a mighty force",

@@ -1,10 +1,13 @@
 {
+    "className": "DefaultClass",
+    "canBePicked": false,
+    "description": "Default Class",
     "stats": {
         "initiativeModifier": 1,
         "attackModifier": 1,
         "defenseModifier": 1
     },
-    "abilities": {
+    "abilityConstants": {
         "hit": {
             "name": "hit",
             "description": "Hit the enemy",

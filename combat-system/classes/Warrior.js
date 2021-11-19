@@ -5,31 +5,26 @@ class Warrior extends ClassBase {
     constructor(game, owner, team = 1){
         super(game, owner, team)
 
-        this.className = "Warrior"
-        this.description = "A ruthless Warrior that hits before it thinks!"
-
-        this.classInitiativeModifier = warriorConstants.stats.initiativeModifier
-        this.classAttackModifier = warriorConstants.stats.attackModifier
-        this.classDefenseModifier = warriorConstants.stats.defenseModifier
+        Object.keys(warriorConstants).forEach(key => this[key] = warriorConstants[key])
     }
 
     abilities = (ability = null) => {
         const allAbilities = {
             slam: {
                 cast: this.slam,
-                constants: warriorConstants.abilities.slam
+                constants: warriorConstants.abilityConstants.slam
             },
             heartStrike: {
                 cast: this.heartStrike,
-                constants: warriorConstants.abilities.heartStrike
+                constants: warriorConstants.abilityConstants.heartStrike
             },
             shieldWall: {
                 cast: this.shieldWall,
-                constants: warriorConstants.abilities.shieldWall
+                constants: warriorConstants.abilityConstants.shieldWall
             },
             whirlwind: {
                 cast: this.whirlwind,
-                constants: warriorConstants.abilities.whirlwind
+                constants: warriorConstants.abilityConstants.whirlwind
             }
         }
 

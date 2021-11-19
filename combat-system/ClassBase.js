@@ -143,9 +143,9 @@ class ClassBase extends AbilityEngine {
     }
 
     _applyClassModifiers = () => {
-        this.initiative = this.initiative * (this.classInitiativeModifier || 1)
-        this.attack = this.attack * (this.classAttackModifier || 1)
-        this.defense = this.defense * (this.classDefenseModifier || 1)
+        this.initiative = this.initiative * (this.stats.classInitiativeModifier || 1)
+        this.attack = this.attack * (this.stats.classAttackModifier || 1)
+        this.defense = this.defense * (this.stats.classDefenseModifier || 1)
     }
 
     _getAliveMembersFromTeam = (team = this.team) => {

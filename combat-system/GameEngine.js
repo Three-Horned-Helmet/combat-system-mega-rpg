@@ -120,7 +120,6 @@ class GameEngine {
             const classToInitiate = this.classList[Object.keys(this.classList).find(classKey => classKey === user.hero?.className)] || this.classList.DefaultClass
             const classInstance = new classToInitiate(this, user, team)
             this._initiateClass(classInstance)
-
             return classInstance
         }
 

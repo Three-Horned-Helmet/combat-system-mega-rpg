@@ -5,35 +5,30 @@ class DefaultClass extends ClassBase {
     constructor(game, owner, team = 1){
         super(game, owner, team)
 
-        this.className = "DefaultClass"
-        this.description = "Default Class"
-
-        this.classInitiativeModifier = defaultClassConstants.stats.initiativeModifier
-        this.classAttackModifier = defaultClassConstants.stats.attackModifier
-        this.classDefenseModifier = defaultClassConstants.stats.defenseModifier
+        Object.keys(defaultClassConstants).forEach(key => this[key] = defaultClassConstants[key])
     }
 
     abilities = (ability = null) => {
         const allAbilities = {
             hit: {
                 cast: this.hit,
-                constants: defaultClassConstants.abilities.hit
+                constants: defaultClassConstants.abilityConstants.hit
             },
             bodySlam: {
                 cast: this.bodySlam,
-                constants: defaultClassConstants.abilities.bodySlam
+                constants: defaultClassConstants.abilityConstants.bodySlam
             },
             crush: {
                 cast: this.crush,
-                constants: defaultClassConstants.abilities.crush
+                constants: defaultClassConstants.abilityConstants.crush
             },
             massiveSwing: {
                 cast: this.massiveSwing,
-                constants: defaultClassConstants.abilities.massiveSwing
+                constants: defaultClassConstants.abilityConstants.massiveSwing
             },
             protect: {
                 cast: this.protect,
-                constants: defaultClassConstants.abilities.protect
+                constants: defaultClassConstants.abilityConstants.protect
             }
         }
 

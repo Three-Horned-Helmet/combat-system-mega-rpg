@@ -1,10 +1,13 @@
 {
+    "className": "Shaman",
+    "canBePicked": true,
+    "description": "A versatile Shaman that uses natures power to heal and deal damage",
     "stats": {
         "initiativeModifier": 1,
         "attackModifier": 1.1,
         "defenseModifier": 0.9
     },
-    "abilities": {
+    "abilityConstants": {
         "lightningBolt": {
             "name": "lightning bolt",
             "description": "Channels a bolt of lightning towards a targeted enemy",

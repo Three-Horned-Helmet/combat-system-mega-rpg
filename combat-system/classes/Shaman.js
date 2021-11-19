@@ -5,35 +5,30 @@ class Shaman extends ClassBase {
     constructor(game, owner, team = 1) {
         super(game, owner, team)
 
-        this.className = "Shaman"
-        this.description = "A versatile Shaman that uses natures power to heal and deal damage"
-        
-        this.classInitiativeModifier = shamanConstants.stats.initiativeModifier
-        this.classAttackModifier = shamanConstants.stats.attackModifier
-        this.classDefenseModifier = shamanConstants.stats.defenseModifier
+        Object.keys(shamanConstants).forEach(key => this[key] = shamanConstants[key])
     }
 
     abilities = (ability = null) => {
         const allAbilities = {
             lightningBolt: {
                 cast: this.lightningBolt,
-                constants: shamanConstants.abilities.lightningBolt,
+                constants: shamanConstants.abilityConstants.lightningBolt,
             },
             naturesRemedy: {
                 cast: this.naturesRemedy,
-                constants: shamanConstants.abilities.naturesRemedy,
+                constants: shamanConstants.abilityConstants.naturesRemedy,
             },
             healingRain: {
                 cast: this.healingRain,
-                constants: shamanConstants.abilities.healingRain,
+                constants: shamanConstants.abilityConstants.healingRain,
             },
             earthquake: {
                 cast: this.earthquake,
-                constants: shamanConstants.abilities.earthquake,
+                constants: shamanConstants.abilityConstants.earthquake,
             },
             protectiveTotem: {
                 cast: this.protectiveTotem,
-                constants: shamanConstants.abilities.protectiveTotem,
+                constants: shamanConstants.abilityConstants.protectiveTotem,
             }
         }
 

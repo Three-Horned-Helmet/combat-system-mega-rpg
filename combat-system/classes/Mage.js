@@ -6,36 +6,31 @@ class Mage extends ClassBase {
     constructor(game, owner, team = 1) {
         super(game, owner, team)
 
-        this.className = "Mage"
-        this.description = "A powerful mage capable of dealing massive damage to enemies"
-        
-        this.classInitiativeModifier = mageConstants.stats.initiativeModifier
-        this.classAttackModifier = mageConstants.stats.attackModifier
-        this.classDefenseModifier = mageConstants.stats.defenseModifier
+        Object.keys(mageConstants).forEach(key => this[key] = mageConstants[key])
     }
 
     abilities = (ability = null) => {
         const allAbilities = {
             fireball: {
                 cast: this.fireball,
-                constants: mageConstants.abilities.fireball,
+                constants: mageConstants.abilityConstants.fireball,
             },
             fireballDot: {
                 cast: this.fireballDot,
-                constants: mageConstants.abilities.fireballDot,
+                constants: mageConstants.abilityConstants.fireballDot,
                 notAnAbility: true
             },
             arcaneblast: {
                 cast: this.arcaneblast,
-                constants: mageConstants.abilities.arcaneblast,
+                constants: mageConstants.abilityConstants.arcaneblast,
             },
             arcaneConcentration: {
                 cast: this.arcaneConcentration,
-                constants: mageConstants.abilities.arcaneConcentration,
+                constants: mageConstants.abilityConstants.arcaneConcentration,
             },
             rainOfFire: {
                 cast: this.rainOfFire,
-                constants: mageConstants.abilities.rainOfFire,
+                constants: mageConstants.abilityConstants.rainOfFire,
             }
         }
 
