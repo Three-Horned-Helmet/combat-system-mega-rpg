@@ -55,11 +55,12 @@
         },
         "poisonedArrowDot": {
             "name": "poisoned arrow DOT",
+            "description": "Deals damage over 3 turns",
             "combatHitStrings": [
                 "${nameEnemy} takes ${damageDealt} damage from ${nameSelf}!"
             ],
             "DURATION": 3,
-            "DAMAGE_SPREAD": 0.1,
+            "DAMAGE_SPREAD": 0.2,
             "MISS_CHANCE": 0,
             "BASE_DAMAGE": 5,
             "DAMAGE_MULTIPLIER": 0.4

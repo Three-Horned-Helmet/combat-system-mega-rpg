@@ -34,6 +34,5 @@ const allClasses = {
         ...(require("./combat-system/config/shaman-constants.json"))
     }
 }
-console.log("classes", allClasses)
 
 module.exports = { GameEngine, AbilityEngine, allClasses }

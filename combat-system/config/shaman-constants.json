@@ -28,7 +28,7 @@
         },
         "naturesRemedy": {
             "name": "natures remedy",
-            "description": "Summons the natures remedies tp heal a targeted friendly target",
+            "description": "Summons the natures remedies to heal a targeted friendly target",
             "combatHitStrings": [
                 "${nameSelf} summons the natures remedy to nurture ${nameFriend}'s wounds healing ${healingDealt} damage!"
             ],
@@ -46,7 +46,7 @@
         },
         "healingRain": {
             "name": "healing rain",
-            "description": "Conjures soothing rain healing all friendly units",
+            "description": "Conjures soothing rain to heal all friendly units",
             "combatHitStrings": [
                 "${nameSelf} conjures soothing rain healing ${healingString}!"
             ],

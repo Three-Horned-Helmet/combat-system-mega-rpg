@@ -29,6 +29,7 @@
         },
         "fireballDot": {
             "name": "fireball DOT",
+            "description": "Deals damage over 2 turns",
             "combatHitStrings": [
                 "${nameSelf}'s fireball continues to burn ${nameEnemy} for ${damageDealt} damage!"
             ],
