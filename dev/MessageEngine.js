@@ -46,8 +46,10 @@ class MessageEngine  {
         return console.log("New round: " + round)
     }
 
-    endGameMessage = async (winningTeam) => {
-        console.log("END GAME! Winner is " + (winningTeam ? winningTeam.map(u => u.name).join(" ") : "none"))
+    endGameMessage = async (winningTeam, losingTeam) => {
+        console.log("END GAME! \n")
+        console.log("Winner is " + (winningTeam ? winningTeam.map(u => u.name).join(" ") : "none"))
+        console.log("Loser is " + (losingTeam ? losingTeam.map(u => u.name).join(" ") : "none"))
         return process.exit()
     }
 }

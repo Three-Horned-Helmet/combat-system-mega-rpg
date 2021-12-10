@@ -12,7 +12,7 @@ class GameEngine {
         effectMessage: (message) => {},
         abilityMessage: (abilityResponse) => {},
         newRoundMessage: (round) => {},
-        endGameMessage: (winningTeam) => {}
+        endGameMessage: (winningTeam,losingTeam) => {}
     }, teamOne, teamTwo, options = {}) {
         MessageAPI.game = this
 
@@ -162,11 +162,11 @@ class GameEngine {
         if(this.gameIsEnding) return
         this.gameIsEnding = true
         this.gameEnded = true
-        const winningTeam = this._decideWinningTeam()
-        this.MessageAPI.endGameMessage(winningTeam)
+        this.#decideTeamOutcome()
+        this.MessageAPI.endGameMessage(this.winningTeam,this.losingTeam)
     }
 
-    _decideWinningTeam = () => {
+    #decideTeamOutcome = () => {
         const teamOne = this.combatTimeline.filter(u => u.team === 1)
         if(teamOne.length === this.combatTimeline.length) {
             this.winningTeam = this.originalTeamOne
